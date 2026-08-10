@@ -10,11 +10,26 @@ apply plugin: 'com.android.application'
 // please think carefully as to whether such customizations are really necessary
 // before doing so.
 
-// Custom definitions may go here
+// Sloth Load plugin — enables Sinister fast dex scanning at OpMode discovery
+// time (~50% faster init vs. plain FTC SDK reflective scanning). Required for
+// the Sloth runtime dependency below to function. See TeamCode/README.md for
+// why this is here and its SDK 11.2.1 / Gradle 9 compatibility status.
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://repo.dairy.foundation/releases"
+        }
+    }
+    dependencies {
+        classpath "dev.frozenmilk:Load:0.2.4"
+    }
+}
 
 // Include common definitions from above.
 apply from: '../build.common.gradle'
 apply from: '../build.dependencies.gradle'
+apply plugin: 'dev.frozenmilk.sinister.sloth.load'
 
 android {
     namespace = 'org.firstinspires.ftc.teamcode'
@@ -24,6 +39,36 @@ android {
     }
 }
 
+repositories {
+    maven { url = 'https://maven.pedropathing.com' }
+    maven { url = "https://mymaven.bylazar.com/releases" }
+    maven { url = "https://repo.dairy.foundation/releases" }
+    maven { url = "https://repo.dairy.foundation/snapshots" }
+}
+
 dependencies {
     implementation project(':FtcRobotController')
+
+    // Sloth runtime — Sinister fast dex scanning. Paired with the Sloth Load
+    // Gradle plugin applied above.
+    implementation("dev.frozenmilk.sinister:Sloth:0.2.4")
+
+    // Pedro Pathing (path following) + Ivy (command-based control flow).
+    implementation('com.pedropathing:ftc:2.1.2')
+    implementation('com.pedropathing:ivy:1.0.1')
+
+    // Dairy CachingHardware: wraps motors/servos to skip redundant
+    // setPower/setPosition calls when the new value is within tolerance of
+    // the cached one.
+    implementation('dev.frozenmilk.dairy:CachingHardware:1.0.0')
+
+    // Panels — Sloth-compatible variant (replaces com.bylazar:fullpanels)
+    implementation("com.bylazar.sloth:fullpanels:0.2.4+1.0.12")
+
+    // FTC Dashboard — Sloth-compatible variant (replaces
+    // com.acmerobotics.dashboard:dashboard). Kept alongside Panels for
+    // passive monitoring / future AdvantageScope integration.
+    implementation("com.acmerobotics.slothboard:dashboard:0.2.4+0.5.1")
+
+    testImplementation 'junit:junit:4.13.2'
 }
