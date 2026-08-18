@@ -55,7 +55,8 @@ dependencies {
 
     // Pedro Pathing (path following) + Ivy (command-based control flow).
     implementation('com.pedropathing:ftc:2.1.2')
-    implementation('com.pedropathing:ivy:1.0.1')
+    // Ivy 1.0.x moved to the com.pedropathing.ivy group; pedro = pathing integration.
+    implementation('com.pedropathing.ivy:pedro:1.0.1')
 
     // Dairy CachingHardware: wraps motors/servos to skip redundant
     // setPower/setPosition calls when the new value is within tolerance of
