@@ -1,10 +1,18 @@
 version: 2
 updates:
-  # Gradle dependencies (build.gradle, build.common.gradle, etc.).
-  # gradle-wrapper is intentionally not updated here: the wrapper version is
-  # pinned by the FTC SDK template (Gradle 9.1 + AGP 8.13.2) and must move
-  # with SDK updates, not on its own schedule.
   - package-ecosystem: "gradle"
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      # AGP 8.x breaks on Gradle >=9.6 (removed internal API), and AGP 9.x
+      # requires Gradle >=9.5 plus build file changes, so the two must move
+      # together as a coordinated upgrade — not via separate Dependabot PRs.
+      # Keep the wrapper in AGP 8's supported range (<=9.5) until we follow
+      # the FTC SDK template onto AGP 9; remove these ignores then.
+      - dependency-name: "gradle-wrapper"
+        versions: [">=9.6"]
+      - dependency-name: "com.android.application"
+        versions: [">=9"]
+      - dependency-name: "com.android.library"
+        versions: [">=9"]
