@@ -1,0 +1,10 @@
+version: 2
+updates:
+  # Gradle dependencies (build.gradle, build.common.gradle, etc.).
+  # gradle-wrapper is intentionally not updated here: the wrapper version is
+  # pinned by the FTC SDK template (Gradle 9.1 + AGP 8.13.2) and must move
+  # with SDK updates, not on its own schedule.
+  - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "weekly"
