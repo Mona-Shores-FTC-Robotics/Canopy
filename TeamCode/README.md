@@ -10,7 +10,7 @@ and why — so the reasoning survives past whoever added it.
 |---|---|---|
 | Sloth | `dev.frozenmilk.sinister:Sloth:0.2.4` (+ `dev.frozenmilk:Load:0.2.4` Gradle plugin) | Fast dex scanning at OpMode discovery time — roughly 50% faster init than the SDK's plain reflective scan. |
 | Pedro Pathing | `com.pedropathing:ftc:2.1.2` | Autonomous path following (Bézier curves, continuous path correction). |
-| Ivy | `com.pedropathing:ivy:1.0.1` | Command-based control flow (scheduler, `Command`/`CommandBuilder`, subsystem requirements/priority). Pedro Pathing's own command framework — used in place of NextFTC. |
+| Ivy | `com.pedropathing.ivy:pedro:1.0.1` | Command-based control flow (scheduler, `Command`/`CommandBuilder`, subsystem requirements/priority). Pedro Pathing's own command framework — used in place of NextFTC. |
 | CachingHardware | `dev.frozenmilk.dairy:CachingHardware:1.0.0` | Wraps motor/servo writes to skip redundant `setPower`/`setPosition` calls when the new value is within tolerance of the cached one. |
 | Panels | `com.bylazar.sloth:fullpanels:0.2.4+1.0.12` | Live dashboard: real-time tuning of constants (including Pedro path constants, which plain FTC Dashboard can't tune), field/pose overlay, wireless Limelight pipeline tuning, telemetry graphs. Sloth-compatible build variant of `com.bylazar:fullpanels`. |
 | FTC Dashboard | `com.acmerobotics.slothboard:dashboard:0.2.4+0.5.1` | Passive telemetry/field monitoring, run alongside Panels. Sloth-compatible build variant of `com.acmerobotics.dashboard:dashboard`. Kept in case we resume AdvantageScope integration (it piggybacks on FTC Dashboard's packet stream). |
