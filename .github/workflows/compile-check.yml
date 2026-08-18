@@ -43,7 +43,8 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v7
         with:
-          name: canopy-apk-${{ github.ref_name }}
+          # run_number, not ref_name: branch names can contain / (invalid in artifact names).
+          name: canopy-apk-${{ github.run_number }}
           path: TeamCode/build/outputs/apk/debug/*.apk
           retention-days: 7
 
